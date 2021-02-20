@@ -1,0 +1,70 @@
+<%- include('parts/header.ejs') %>
+<%- include('parts/navbar.ejs') %>
+
+<div class="container content">
+    <% if(productEdited) { %>
+        <p class="alert alert-success">
+            Product Edited successfully
+        </p>
+    <% } %>
+    <!-- If there is no product with the requested id -->
+    <% if(!product) { %>
+        <div class="alert alert-danger">
+            There is no product with this id :(
+        </div>
+    <% } else { %>
+        <div class="row">
+            <div class="col col-12 col-md-6">
+                <div class="card" style="width: 100%;">
+                    <img src="/<%= product.img%>" class="card-img-top" style="max-height: 400px">
+                </div>
+            </div>
+            <div class="col col-12 col-md-6 product-detail">
+                <form action="/admin/edit" method="POST">
+                
+                    <div class="form-group row">
+                        <label style="font-weight: bold;" for="inputName" class="col-xl-4 col-lg-10 col-sm-10 col-md-10 col-form-label">Name:</label>
+                        <div class="col-xl-8 col-lg-10 col-sm-10 col-md-10">
+                            <input type="text" class="form-control" name="name" value="<%= product.name%>">
+                        </div>
+                    <% let nameError = validationErrors.find(err => err.param === 'name') %>
+                    <% if (nameError) { %>
+                        <p class="alert alert-danger">
+                            <%= nameError.msg %>
+                        </p>
+                    <% } %>
+                    </div>
+                    <div class="form-group row">
+                        <label style="font-weight: bold;" for="inputPrice" class="col-xl-4 col-lg-10 col-sm-10 col-md-10 col-form-label">Price:</label>
+                        <div class="col-xl-8 col-lg-10 col-sm-10 col-md-10">
+                            <input type="number" class="form-control" name="price" value="<%= product.price %>">
+                        </div>
+                    <% let priceError = validationErrors.find(err => err.param === 'price') %>
+                    <% if (priceError) { %>
+                        <p class="alert alert-danger">
+                            <%= priceError.msg %>
+                        </p>
+                    <% } %>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label style="font-weight: bold;" for="inputDescription" class="">Description:</label>
+                        
+                        <textarea type="password" class="form-control" name="description"><%= product.description%></textarea>
+                        <% let descriptionError = validationErrors.find(err => err.param === 'description') %>
+                        <% if (descriptionError) { %>
+                            <p class="alert alert-danger">
+                                <%= descriptionError.msg %>
+                            </p>
+                        <% } %>
+                    </div>
+                     <input type="hidden" name="id" value="<%= product.id %>">
+                     <input  type="submit" value="Edit" class="btn btn-success">
+                </form>
+            </div>
+        </div>
+    <% } %>
+</div>
+
+
+<%- include('parts/footer.ejs') %>

@@ -1,0 +1,53 @@
+<div class="container-fluid" style="background-color: #18BC9C;">
+    <div class="container" style="font-size: 20px;">
+        <nav  class="navbar  navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="/home-index"><img src="/imgs/logo.png" alt="" style="width: 30px; height: 30px;"></a>
+        <a class="navbar-brand" href="/home-index" style="color: white;">Node.js e-commerce</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+    
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item <%= pageTitle === 'Products' ? 'active' : '' %>">
+            <a class="nav-link" href="/products">Products<span class="sr-only">(current)</span></a>
+            </li>
+            <% if(isAdmin) { %>
+                <li class="nav-item <%= pageTitle === 'Add-Product' ? 'active' : '' %>">
+                    <a class="nav-link" href="/admin/add">Add Products<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item <%= pageTitle === 'Manage-orders' ? 'active' : '' %>">
+                    <a class="nav-link" href="/admin/orders">Manage Orders<span class="sr-only">(current)</span></a>
+                </li>
+            <% } else if(isUser) { %>
+                <li class="nav-item <%= pageTitle === 'Cart' ? 'active' : '' %>">
+                    <a class="nav-link" href="/cart">Cart<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item <%= pageTitle === 'Orders' ? 'active' : '' %>">
+                    <a class="nav-link" href="/orders">Orders<span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item <%= pageTitle === 'User-count' ? 'active' : '' %>">
+                    <a class="nav-link" href="/user">Profile<span class="sr-only">(current)</span></a>
+                </li>
+            <% } else { %>
+            <li class="nav-item <%= pageTitle === 'Register' ? 'active' : '' %>">
+                <a class="nav-link" href="/register">Register<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item <%= pageTitle === 'Login' ? 'active' : '' %>">
+                <a class="nav-link" href="/login">Login<span class="sr-only">(current)</span></a>
+            </li>
+            <% } %>
+            <% if(isUser) { %>
+                <li class="nav-item">
+                <form  action="/logout" method="POST">
+                    <input style="background-color: inherit; border-width: 0px;" type="submit" value="Logout" class="nav-link"/>
+                </form>
+                </li>
+            <% } %>
+            </div>
+        </ul>
+    </nav>  
+    </div>  
+    
+    
+</div>

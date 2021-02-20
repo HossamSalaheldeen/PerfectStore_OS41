@@ -1,0 +1,80 @@
+<%- include('parts/header.ejs') %>
+<%- include('parts/navbar.ejs') %>
+
+<div class="container content">
+    <% if(userEdited) { %>
+        <p class="alert alert-success">
+            Information Edited successfully
+        </p>
+    <% } %>   
+    <div class="login-container mx-auto">
+        <div class="register-header">
+            <h4>Edit Account</h4>
+        </div>
+        <div class="form-container mx-auto">
+            <form action="/user/edit" method="POST">
+            
+                <div class="form-group row">
+                    <label for="inputUserName" class="col-lg-2 col-sm-2 col-form-label">Username*:</label>
+                    <div class="col-lg-10 col-sm-10">
+                        <input type="text" id="inputUserName" class="form-control" name="username" value="<%= user.username%>">
+                    </div>
+                <% let nameError = validationErrors.find(err => err.param === 'name') %>
+                <% if (nameError) { %>
+                    <p class="alert alert-danger">
+                        <%= nameError.msg %>
+                    </p>
+                <% } %>
+                </div>
+                <div class="form-group row">
+                    <label for="inputEmail" class="col-lg-2 col-sm-2 col-form-label">Email*:</label>
+                    <div class="col-lg-10 col-sm-10">
+                        <input type="email" id="inputEmail" class="form-control" name="email" value="<%= user.email %>">
+                    </div>
+                <% let emailError = validationErrors.find(err => err.param === 'email') %>
+                <% if (emailError) { %>
+                    <p class="alert alert-danger">
+                        <%= emailError.msg %>
+                    </p>
+                <% } %>
+                </div>
+                <div class="form-group row">
+                    <label for="inputPassword" class="col-lg-2 col-sm-2 col-form-label">New Password*:</label>
+                    <div class="col-lg-10 col-sm-10">
+                        <input type="password" id="inputPassword" class="form-control" name="password" placeholder="New Password">
+                    </div>
+                <% let passwordError = validationErrors.find(err => err.param === 'password') %>
+                <% if (passwordError) { %>
+                    <p class="alert alert-danger">
+                        <%= passwordError.msg %>
+                    </p>
+                <% } %>
+                </div>
+                <div class="form-group row">
+                    <label for="inputCPassword" class="col-lg-2 col-sm-2 col-form-label">Confirm Password*:</label>
+                    <div class="col-lg-10 col-sm-10">
+                        <input type="password" id="inputCPassword" class="form-control" name="confirmPassword" placeholder="Confirm Password">
+                    </div>
+                <% let confirmPasswordError = validationErrors.find(err => err.param === 'confirmPassword') %> <!--param contains field checked-->
+                <% if(confirmPasswordError) { %>
+                    <p class="alert alert-danger">
+                        <%= confirmPasswordError.msg %>  <!-- msg contain the message returned by falied check -->
+                    </p>
+                <% } %>
+                </div>
+                <div class="form-group row">
+                    <div class="col-lg-2 col-sm-2"></div>
+                    <div class="col-lg-10 col-sm-10">
+                        <input type="hidden" name="id" value="<%= user.id %>">
+                        <input type="submit" value="Edit" class="btn btn-success">
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    
+</div>
+
+
+<%- include('parts/footer.ejs') %>

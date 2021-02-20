@@ -1,0 +1,86 @@
+<%- include('parts/header')%>
+<%- include('parts/navbar')%>
+
+<div class="container content">
+
+    <% if(productAdded) { %>
+        <p class="alert alert-success">
+            Product added successfully
+        </p>
+    <% } %>
+
+    <div class="register-header">
+        <h4>Add Product</h4>
+    </div>
+    <!-- Will use  (enctype="multipart/form-data") new encryption model helps us to include images // Have to install multer moduls-->
+    <form action="/admin/add" method="POST" enctype="multipart/form-data">
+        <div class="form-row">
+            <div class="form-group col-md-8">
+                <label for="inputname">Name*</label>
+                <input type="text" id="inputname" class="form-control" name="name" placeholder="Name">
+            
+            <% let nameError = validationErrors.find(err => err.param === 'name') %>
+            <% if (nameError) { %>
+                <p class="alert alert-danger">
+                    <%= nameError.msg %>
+                </p>
+            <% } %>
+            </div>
+        <div class="form-group col-md-4">
+            <label for="inputPrice">Price*</label>
+            <input type="number" id="inputPrice" class="form-control" name="price" placeholder="Price">
+        
+        <% let priceError = validationErrors.find(err => err.param === 'price') %>
+        <% if (priceError) { %>
+            <p class="alert alert-danger">
+                <%= priceError.msg %>
+            </p>
+        <% } %>
+        </div>
+        </div>
+        <div class="form-row">
+        <div class="form-group col-md-8">
+            <label for="inputDescription">Description</label>
+            <textarea type="password" id="inputDescription" class="form-control" name="description" placeholder="Description"></textarea>
+        
+        <% let descriptionError = validationErrors.find(err => err.param === 'description') %>
+        <% if (descriptionError) { %>
+            <p class="alert alert-danger">
+                <%= descriptionError.msg %>
+            </p>
+        <% } %>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inputCategory">Category</label>
+            <select type="password" class="form-control" name="category">
+                <option value="" selected>Choose a category</option>
+                <option value="T-shirt">T-shirt</option>
+                <option value="Suit-shirt">Suit-shirt</option>
+                
+            </select>
+        <% let categoryError = validationErrors.find(err => err.param === 'category') %>
+        <% if (categoryError) { %>
+            <p class="alert alert-danger">
+                <%= categoryError.msg %>
+            </p>
+        <% } %>
+        </div>
+        </div>
+        <div class="form-row">
+        <div class="form-group col-md-8">
+                <label for="inputImage">Upload Image</label>
+                <input type="file" id="inputImage" class="form-control-file" name="image" placeholder="Image">
+            
+        <% let imageError = validationErrors.find(err => err.param === 'image') %>
+        <% if (imageError) { %>
+            <p class="alert alert-danger">
+                <%= imageError.msg %>
+            </p>
+        <% } %>
+        </div>
+        </div>
+        <input type="submit" value="Add new" class="btn btn-primary">
+    </form>
+</div>
+
+<%- include('parts/footer')%>

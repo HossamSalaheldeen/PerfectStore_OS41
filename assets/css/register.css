@@ -1,0 +1,53 @@
+
+
+.login-container {
+    border: 2px solid #ECF0F1;
+    margin-top: 50px;
+    width: 80%;
+}
+
+.register-header {
+    background-color: #ECF0F1;
+    color: #643E50;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 30px;
+}
+
+.login-container .form-group label{
+    
+    height: 50px;
+    color: #2C3E50;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+
+.login-container .form-group input{
+    
+    height: 50px;
+    border: 3px solid #ECF0F1;
+}
+
+input[type=submit]{
+    
+    background-color: #128F76;
+    color: white;
+    min-width: 100px;
+}
+
+.no-account {
+    color: #2C3E50;
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.form-container {
+    width: 70%;
+}
+
+
+
+
+

@@ -1,0 +1,19 @@
+
+.thumbnail {
+    text-align: center;
+}
+
+.featurette-divider {
+    margin-top: 2rem; /* Space out the Bootstrap <hr> more */
+    margin-bottom: 3rem; /* Space out the Bootstrap <hr> more */
+  }
+
+.fakeimg {
+    background-color: #18BC9C;
+    padding-top: 100px;
+    height: 220px;
+    width: 100%;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+  }

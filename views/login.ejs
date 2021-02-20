@@ -1,0 +1,60 @@
+<%- include('parts/header')%>
+<%- include('parts/navbar')%>
+
+<div class="container content">
+    
+    <div class="login-container mx-auto">
+        <div class="register-header">
+        <h4>Login</h4>
+        </div>
+        <div class="form-container mx-auto">
+        <form action="/login" method="POST">
+            <div class="form-group row">
+            <label for="inputEmail" class="col-lg-2 col-sm-2 col-form-label">Email*:</label>
+                <div class="col-lg-10 col-sm-10">
+                    <input type="email" id="inputEmail" class="form-control" name="email" placeholder="E-mail">
+                </div>
+            
+            <% let emailError = validationErrors.find(err => err.param === 'email') %>
+            <% if(emailError) { %>
+                <p class="alert alert-danger">
+                    <%= emailError.msg %>  <!-- msg contain the message returned by falied check -->
+                </p>
+            <% } %>
+            </div>
+            <div class="form-group row">
+                <label for="inputPassword" class="col-lg-2 col-sm-2 col-form-label">Password*:</label>
+                <div class="col-lg-10 col-sm-10">
+                    <input type="password" id="inputPassword" class="form-control" name="password" placeholder="Password">
+                </div>
+            
+            <% let passwordError = validationErrors.find(err => err.param === 'password') %> <!--param contains field checked-->
+            <% if(passwordError) { %>
+                <p class="alert alert-danger">
+                    <%= passwordError.msg %>  <!-- msg contain the message returned by falied check -->
+                </p>
+            <% } %>
+            </div>
+            <div class="form-group row">
+            <div class="col-lg-2 col-sm-2"></div>
+            <div class="col-lg-10 col-sm-10">
+                <input type="submit" value="Login" class="btn btn-success">
+            </div>
+            </div>
+        </form>
+        
+        <br/>
+        <% if(authError) { %>
+            <p class="alert alert-danger">
+                <%= authError %>
+            </p>
+        <% } %>
+        </div>
+        <div class="text-center no-account">
+            Don't have account ? <a href="/register">Register</a>
+        </div>
+    </div>
+    
+</div>
+
+<%- include('parts/footer')%>

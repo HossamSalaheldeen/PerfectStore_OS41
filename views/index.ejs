@@ -1,0 +1,90 @@
+<%- include('parts/header.ejs') %>
+<%- include('parts/navbar.ejs') %>
+
+<div class="container content">
+    <form class="filter" action="/products" method="GET">
+        <div class="row">
+            <div class="col-10 col-sm-10 col-md-10">
+                <select name="category" class="form-control">
+                    <option value="">Choose a category</option>
+                    <option value="all">All</option>
+                    <option value="T-shirt">T-shirt</option>
+                    <option value="Suit-shirt">Suit-shirt</option>
+                    
+                </select>
+            </div>
+            <div class="col-2 col-sm-2 col-md-2">
+                <input style="width: 100%;" type="submit" class="btn btn-success" value="Filter">
+            </div>
+        </div>
+    </form>
+    <br/>
+    <% if(validationError) { %>
+        <p class="alert alert-danger">
+            <%= validationError.msg%>
+        </p>
+    <% } %>
+
+    <!-- If there is no product in Database -->
+    <% if(products.length === 0) { %> 
+        <div class="alert alert-danger">
+            There is no products :(
+        </div>
+    <% } else { %>
+    
+    <div class="row">
+        
+        <% for (let product of products) { %>
+           
+                <div class="card col-12 col-sm-12 col-md-3" style=" width: 20rem;">
+                    <h5 class="card-title register-header">
+                        <a href="/product/<%= product.id %>"> <%= product.name %> </a>
+                    </h5>
+                    <a href="/product/<%= product.id %>"><img src="<%= product.img %>" class="card-img-top" alt="product image"></a>
+                    <div class="card-body">
+                        <li class="list-group-item"><i class="far fa-calendar"></i> <div class="show"><p>Price</p><p>$<%= product.price %></p></div></li>
+                      
+                      <% if(isAdmin) { %>
+                        <form action="/admin/edit/<%= product.id %>" method="GET">
+  
+                            <input style="margin-top: 20px; width: 100%;" type="submit" value="Edit product" class="btn btn-success">
+                        </form>
+
+                        <form action="/admin/delete" method="POST">
+                            <input type="hidden" name="id" value="<%= product.id %>">
+  
+                            <input style="width: 100%;" type="submit" value="Delete product" class="btn btn-success">
+                        </form>
+
+                    <% } else if(isUser) { %>
+                    
+                      <form action="/cart" method="POST">
+                        <li class="list-group-item"><i class="far fa-calendar-alt"></i> <div class="show">
+                        <div  class="form-group row">
+                            <label style="font-weight: bold;" for="inputAmount" class="col-xl-6 col-lg-12 col-sm-12 col-md-12 col-form-label">Amount:</label>
+                            <div class="col-xl-6 col-lg-12 col-sm-12 col-md-12">
+                                <input type="number" name="amount" class="form-control">
+                            </div>
+                        </div>
+                        </div> </li>
+                          <!-- Need to send Product_id, Product_name and Price -->
+                          <input type="hidden" name="productId" value="<%= product.id %>">
+                          <input type="hidden" name="productName" value="<%= product.name%>">
+                          <input type="hidden" name="productPrice" value="<%= product.price %>">
+                          <!-- To redirect to the same page, if a validation error -->
+                          <input type="hidden" name="redirectTo" value="/products">
+
+                          <input style=" margin-top: 20px; width: 100%;" type="submit" value="Add to cart" class="btn btn-success">
+                      </form>
+                    
+                    <% } %>
+                    </div>
+                  </div>
+            
+            
+        <% } %>
+    </div>
+    <% } %>
+</div>
+
+<%- include('parts/footer.ejs') %>

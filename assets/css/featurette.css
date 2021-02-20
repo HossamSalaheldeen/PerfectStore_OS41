@@ -1,0 +1,74 @@
+/* MARKETING CONTENT
+-------------------------------------------------- */
+
+/* Center align the text within the three columns below the carousel */
+.marketing .col-lg-4 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .marketing h2 {
+    font-weight: 400;
+  }
+  .marketing .col-lg-4 p {
+    margin-right: .75rem;
+    margin-left: .75rem;
+  }
+
+
+/* Thin out the marketing headings */
+.featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -.05rem;
+  }
+
+  .first-featurette{
+    background-color: #E1E1E1;
+    margin-top: 40px;
+    
+  }
+
+  .second-featurette{
+    
+    margin-top: 20px;
+  }
+
+  .fakefeaturette {
+    background-color: white;
+    height: 500px;
+    width: 600px;
+    padding-top: 250px;
+    background-color: white;
+    color: #CCCCCC;
+    font-size: 30px;
+    text-align: center;
+    margin: 100px 0;
+  }
+
+  .second-fakefeaturette {
+    background-color: #CCCCCC;
+    color: #969696;
+    height: 600px;
+    margin: 100px 0;
+    font-size: 30px;
+    text-align: center;
+    padding-top: 300px;
+    
+  }
+
+
+/* RESPONSIVE CSS
+-------------------------------------------------- */
+
+@media (min-width: 40em) {
+
+    .featurette-heading {
+      font-size: 50px;
+    }
+  }
+  
+  @media (min-width: 62em) {
+    .featurette-heading {
+      margin-top: 7rem;
+    }
+  }

@@ -1,0 +1,31 @@
+<%- include('parts/header')%>
+<%- include('parts/navbar')%>
+
+<div class="container content">
+    <div class="register-header">
+        <h4>Verify your order</h4>
+    </div>
+    <% if(validationError) { %>
+    <p class="alert alert-danger">
+    <%= validationError.msg %>
+    </p>
+    <% } %>
+    <form action="/orders" method="POST">
+        <input type="hidden" name="cartId" value="<%= cart.id%>">
+        <input type="hidden" name="name" value="<%= cart.productName%>">
+        <input type="hidden" name="price" value="<%= cart.price%>">
+        <input type="hidden" name="amount" value="<%= cart.amount%>">
+        <input type="hidden" name="productId" value="<%= cart.productId%>">
+        <input type="hidden" name="userId" value="<%= cart.userId%>">
+        <div class="form-group row">
+            <label style="height: 50px; color: #2C3E50; font-weight: bold;" for="inputAddress" class="col-lg-2 col-sm-2 col-form-label">Address*:</label>
+            <div class="col-lg-10 col-sm-10">
+                <input style="height: 50px;  border: 3px solid #ECF0F1;" type="text" name="address" placeholder="Enter the Address" class="form-control">
+            </div>
+        </div>
+        <input type="submit" value="Verify" class="btn btn-success">
+    </form>
+</div>
+
+<%- include('parts/footer')%>
+

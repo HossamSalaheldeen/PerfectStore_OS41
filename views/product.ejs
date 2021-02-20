@@ -1,0 +1,54 @@
+<%- include('parts/header.ejs') %>
+<%- include('parts/navbar.ejs') %>
+
+<div class="container content">
+    <!-- If there is no product with the requested id -->
+    <% if(!product) { %>
+        <div class="alert alert-danger">
+            There is no product with this id :(
+        </div>
+    <% } else { %>
+        <div class="row">
+            <div class="col col-12 col-md-8">
+                <div class="register-header">
+                    <h3><%= product.name%></h3>
+                </div>
+                <div class="card" style="width: 100%;">
+                    <img src="/<%= product.img%>" class="card-img-top" style="max-height: 400px">
+                    <div class="card-body">
+                        <form action="/cart" method="POST" class="add-to-cart-form">
+                            <div class="form-group row">
+                                <label style="font-weight: bold;" for="inputAmount" class="col-xl-5 col-lg-10 col-sm-10 col-md-10 col-form-label">Amount:</label>
+                                <div class="col-xl-5 col-lg-10 col-sm-10 col-md-10">
+                                    <input type="number" name="amount" class="form-control">
+                                </div>
+                            </div>
+                            <!-- Need to send Product_id, Product_name and Price -->
+                            <input type="hidden" name="productId" value="<%= product.id %>">
+                            <input type="hidden" name="productName" value="<%= product.name%>">
+                            <input type="hidden" name="productPrice" value="<%= product.price %>">
+                            <!-- To redirect to the same page, if a validation error -->
+                            <input type="hidden" name="redirectTo" value="/product/<%= product.id %>"> 
+                            
+                            <input style="width: 100%;" type="submit" value="Add to cart" class="btn btn-success">
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col col-12 col-md-4 product-detail">
+                <div class="register-header">
+                    <h3>Product Details</h3>
+                </div>
+                <h3 >Price </h3>
+                <span style="color: #e74c3c; font-size: 30px; font-weight: bold;">$<%= product.price %></span><span style="color: gray;">Only</span>
+                <hr>
+                <h3 >Description</h3>
+                <div style="min-height: 100px;  border: 3px solid #ECF0F1;"><p><%= product.description%></p></div>
+                
+            </div>
+        </div>
+    <% } %>
+</div>
+
+
+<%- include('parts/footer.ejs') %>
